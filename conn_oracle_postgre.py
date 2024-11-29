@@ -6,10 +6,11 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 load_dotenv()
 
 
-username = os.getenv("ORACLE_USERNAME")
-pw = os.getenv("ORACLE_PASSWORD")
-hostname = os.getenv("ORACLE_HOSTNAME")
-sid = os.getenv("ORACLE_SID")
+username = os.getenv("POSTGRESQL_USERNAME")
+password = os.getenv("POSTGRESQL_PASSWORD")
+host = os.getenv("POSTGRESQL_HOSTNAME")
+port = os.getenv("POSTGRESQL_PORT")
+db_name = os.getenv("POSTRESQL_DBNAME")
 
 
 class Recipe(SQLModel, table=True):
@@ -18,7 +19,7 @@ class Recipe(SQLModel, table=True):
 
 
 # Con echo=True se muestran los comandos
-oracle_url = f"oracle+oracledb://{username}:{pw}@{hostname}/{sid}"
+oracle_url = f"postgresql+psycopg2://{username}:{password}@{host}:{port}/{db_name}"
 engine = create_engine(oracle_url, echo=True)
 
 # En este momento se crea la tabla
